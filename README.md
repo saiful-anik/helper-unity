@@ -21,7 +21,7 @@ To add Helper Tool, follow these steps:
 * Click on the `+` button and select `Add package from git URL`.
 * Enter the following GitHub link:
 ```bash
-  https://github.com/lufias-69/helper-unity.git
+  https://github.com/saiful-anik/helper-unity.git
 ```
 Click Add and wait for the package to be imported.
 ## Usage/Examples
