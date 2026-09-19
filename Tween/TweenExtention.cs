@@ -69,24 +69,31 @@ namespace Helper.Tween
             return tween;
         }
 
-        public static Tween DoMoveXFreeY(
-            this Transform transform,
-            float targetX,
-            float duration)
+        /// <summary>
+        /// Moves the target to the end position on the X axis while preserving
+        /// its current Y value throughout the tween.
+        /// </summary>
+        /// <param name="target">The target transform</param>
+        /// <param name="endValue">The end position on the X axis</param>
+        /// <param name="duration">The duration of the tween</param>
+        /// <returns>The tween object</returns>
+        public static Tween DoMoveXFreeY(this Transform target, float endValue, float duration)
         {
-            float startX = transform.position.x;
-        
-            return Tween.Create(
-                0f,
-                1f,
-                duration,
-                t =>
+            Vector3 endPos = new Vector3(endValue, target.position.y, target.position.z);
+            Tween tween = new Tween(
+                () => target.position,
+                position =>
                 {
-                    Vector3 pos = transform.position;
-                    pos.x = Mathf.Lerp(startX, targetX, t);
-                    transform.position = pos;
-                }
-            );
+                    Vector3 currentPosition = target.position;
+                    currentPosition.x = position.x;
+                    currentPosition.z = position.z;
+                    target.position = currentPosition;
+                },
+                endPos,
+                duration,
+                TweenType.Vector3);
+            tween.Start();
+            return tween;
         }
         #endregion
 
