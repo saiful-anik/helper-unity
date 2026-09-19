@@ -68,6 +68,26 @@ namespace Helper.Tween
             tween.Start();
             return tween;
         }
+
+        public static Tween DoMoveXFreeY(
+            this Transform transform,
+            float targetX,
+            float duration)
+        {
+            float startX = transform.position.x;
+        
+            return Tween.Create(
+                0f,
+                1f,
+                duration,
+                t =>
+                {
+                    Vector3 pos = transform.position;
+                    pos.x = Mathf.Lerp(startX, targetX, t);
+                    transform.position = pos;
+                }
+            );
+        }
         #endregion
 
         #region Local
